@@ -1,0 +1,36 @@
+# OS / archive metadata
+__MACOSX/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Node / npm
+node_modules/
+npm-debug.log*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Logs / temp
+*.log
+*.tmp
+~$*
+
+# Office lock files
+~$*.docx
+~$*.xlsx
+~$*.pptx
+
+# Local environment
+.env
+.env.local
