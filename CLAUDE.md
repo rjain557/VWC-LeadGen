@@ -8,6 +8,19 @@
 
 ---
 
+## Knowledge Vault & Key Vault (load at session start)
+
+Two external locations back this project — check them at the start of any VWC session:
+
+| What | Location | Use |
+|---|---|---|
+| **Obsidian knowledge vault** | `C:\Users\rjain\OneDrive - Technijian, Inc\Documents\obsidian\vwc-leadgen` | Curated VWC intelligence — start at `00 - Dashboard.md`. Holds `Personas.md` (10 investor personas + 3 channel partners), `Channels.md`, `Offerings.md`, `Capital Raise.md`, `Company.md`, `Lead Gen Strategy.md`, `SDC Voice.md`, `Brand & Templates.md`, session logs. Human-curated and richer than the raw PDFs in `company-intel/`. |
+| **Key vault (API keys)** | `C:\Users\rjain\OneDrive - Technijian, Inc\Documents\VSCODE\keys\` | Credentials for the AI lead-gen enrichment stack. Lead-gen keys: `apollo.md`, `hunter.md`, `serpapi.md`, `batchdata.md`, `attom.md`, `opencorporates.md`, `sam-gov.md`, `bbc-leadgen.env`. **Never inline secret values into repo files, commits, or outbound content — reference each key by file name and read it at runtime only.** |
+
+> Vault = the *why / who* (strategy, personas, voice). This repo = the *what* (deliverables, prospect data, outreach). Key vault = the *how* (tooling credentials that power outbound AI lead gen).
+
+---
+
 ## Repo Purpose
 
 This repo owns the **lead generation** side of VWC's go-to-market:

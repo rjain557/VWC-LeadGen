@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VWC Investor Acquisition Strategy — Technijian</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #006DB6; --orange: #F67D4B; --teal: #1EAAC8;
+    --chartreuse: #CBDB2D; --dark: #1A1A2E; --near-black: #2D2D2D;
+    --grey: #59595B; --light-grey: #E9ECEF; --off-white: #F8F9FA;
+    --green: #2E7D32;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  @page { size: letter; margin: 0; }
+  body { font-family: 'Open Sans', sans-serif; color: #333; font-size: 14px; line-height: 1.5; background: #fff; }
+  .page { width: 8.5in; height: 11in; position: relative; overflow: hidden; page-break-after: always; background: #fff; }
+  .page:last-child { page-break-after: auto; }
+  .section-pad { padding: 30px 56px 0; }
+
+  .page-head { display: flex; justify-content: space-between; align-items: center; padding: 20px 56px 0; }
+  .page-head img { height: 24px; }
+  .page-head .page-tag { font-size: 9.5px; font-weight: 700; color: var(--grey); text-transform: uppercase; letter-spacing: 2px; }
+  .blue-underline { height: 3px; background: linear-gradient(90deg, var(--blue) 0%, var(--teal) 60%, var(--orange) 100%); margin: 10px 56px 0; }
+  .page-foot { position: absolute; bottom: 0; left: 0; right: 0; background: var(--near-black); text-align: center; padding: 7px; font-size: 8.5px; color: rgba(255,255,255,0.45); }
+  .page-foot .confidential { color: var(--orange); font-weight: 600; letter-spacing: 1px; }
+
+  h1, h2, h3 { color: var(--dark); }
+  .section-kicker { font-size: 10.5px; font-weight: 700; color: var(--orange); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 7px; }
+  .section-title { font-size: 27px; font-weight: 800; color: var(--dark); margin-bottom: 6px; letter-spacing: -0.5px; line-height: 1.1; }
+  .section-subtitle { font-size: 13.5px; color: var(--grey); margin-bottom: 18px; line-height: 1.5; max-width: 660px; }
+  p { color: #333; font-size: 12.5px; line-height: 1.6; margin-bottom: 10px; }
+  strong { color: var(--dark); font-weight: 700; }
+
+  /* COVER */
+  .cover { background: linear-gradient(135deg, var(--dark) 0%, #0a1628 55%, #0d2847 100%); color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover::before { content: ''; position: absolute; top: -120px; right: -80px; width: 420px; height: 420px; background: radial-gradient(circle, rgba(30,170,200,0.14) 0%, transparent 70%); border-radius: 50%; }
+  .cover::after { content: ''; position: absolute; bottom: -100px; left: 8%; width: 380px; height: 380px; background: radial-gradient(circle, rgba(246,125,75,0.10) 0%, transparent 70%); border-radius: 50%; }
+  .cover-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; max-width: 720px; padding: 0 40px; }
+  .cover-logo { height: 64px; margin-bottom: 38px; }
+  .cover-badge { font-size: 10px; color: var(--teal); border: 1px solid rgba(30,170,200,0.45); background: rgba(30,170,200,0.14); padding: 7px 22px; border-radius: 18px; text-transform: uppercase; letter-spacing: 2.5px; font-weight: 700; display: inline-block; margin-bottom: 28px; }
+  .cover h1 { font-size: 50px; font-weight: 800; line-height: 1.05; margin-bottom: 18px; color: #fff; letter-spacing: -1px; }
+  .cover h1 .o { color: var(--orange); }
+  .cover-sub { font-size: 17px; color: rgba(255,255,255,0.75); font-weight: 300; margin-bottom: 40px; line-height: 1.55; }
+  .cover-client { margin: 16px 0 0; padding-top: 26px; border-top: 1px solid rgba(255,255,255,0.12); width: 100%; }
+  .cover-client .prep { font-size: 10.5px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 9px; }
+  .cover-client .client { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .cover-client .sub { font-size: 13px; color: rgba(255,255,255,0.6); }
+  .cover-foot { position: absolute; bottom: 26px; width: 100%; text-align: center; font-size: 10.5px; color: rgba(255,255,255,0.4); z-index: 1; letter-spacing: 0.5px; }
+  .cover-foot .conf { color: var(--orange); font-weight: 600; letter-spacing: 1.5px; }
+
+  /* PULL QUOTE */
+  .pull-quote { background: var(--off-white); border-left: 4px solid var(--orange); padding: 18px 24px; border-radius: 4px; margin: 14px 0 18px; font-size: 15px; color: var(--dark); line-height: 1.5; font-weight: 500; }
+  .pull-quote .q { color: var(--blue); font-weight: 700; }
+
+  /* ENGINE SPLIT */
+  .engine-split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 6px 0 14px; }
+  .engine-card { border-radius: 12px; padding: 20px 22px; color: #fff; position: relative; overflow: hidden; }
+  .engine-card.seo { background: linear-gradient(135deg, var(--blue) 0%, #004d82 100%); }
+  .engine-card.ai { background: linear-gradient(135deg, var(--dark) 0%, #2a1f3a 100%); }
+  .engine-card .etag { font-size: 9.5px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; color: rgba(255,255,255,0.7); margin-bottom: 6px; display: block; }
+  .engine-card h3 { font-size: 18px; color: #fff; font-weight: 800; margin-bottom: 4px; }
+  .engine-card .tagline { font-size: 12px; color: var(--orange); font-weight: 700; margin-bottom: 10px; }
+  .engine-card.seo .tagline { color: var(--chartreuse); }
+  .engine-card p { color: rgba(255,255,255,0.85); font-size: 11.5px; line-height: 1.55; margin-bottom: 8px; }
+  .engine-card ul { list-style: none; }
+  .engine-card li { font-size: 11px; color: rgba(255,255,255,0.9); padding: 2px 0 2px 16px; position: relative; }
+  .engine-card li::before { content: "\25B8"; color: var(--orange); position: absolute; left: 0; }
+  .engine-card.seo li::before { color: var(--chartreuse); }
+
+  /* GENERIC TABLE */
+  .tbl { width: 100%; border-collapse: collapse; margin: 6px 0 10px; font-size: 11.5px; }
+  .tbl thead th { background: var(--blue); color: #fff; text-align: left; padding: 8px 11px; font-weight: 700; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .tbl td { padding: 7px 11px; border-bottom: 1px solid var(--light-grey); vertical-align: top; color: #333; line-height: 1.45; }
+  .tbl tbody tr:nth-child(even) { background: var(--off-white); }
+  .tbl td.c { text-align: center; white-space: nowrap; }
+
+  /* ENGINE PILLS */
+  .pill { display: inline-block; font-size: 9.5px; font-weight: 700; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+  .pill.seo { background: rgba(0,109,182,0.12); color: var(--blue); }
+  .pill.ai { background: rgba(26,26,46,0.10); color: var(--dark); }
+  .pill.both { background: rgba(246,125,75,0.15); color: #c2531f; }
+  .pill.warm { background: rgba(46,125,50,0.12); color: var(--green); }
+  .pill.p0 { background: var(--orange); color:#fff; } .pill.p1 { background: rgba(246,125,75,0.18); color:#c2531f; } .pill.p2 { background: var(--light-grey); color: var(--grey); }
+
+  /* SMALL CARDS GRID */
+  .mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
+  .mini-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+  .mini-card { background: #fff; border: 1px solid var(--light-grey); border-radius: 9px; padding: 12px 15px; border-left: 4px solid var(--blue); }
+  .mini-card:nth-child(3n+2) { border-left-color: var(--orange); }
+  .mini-card:nth-child(3n) { border-left-color: var(--teal); }
+  .mini-card h4 { font-size: 12.5px; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
+  .mini-card .who { font-size: 9.5px; color: var(--grey); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display:block; }
+  .mini-card p { font-size: 11px; color: #444; line-height: 1.5; margin-bottom: 5px; }
+  .mini-card .q { font-style: italic; color: var(--blue); font-size: 10.5px; }
+
+  /* PHASE TIMELINE */
+  .phase-timeline { margin-top: 8px; }
+  .phase-row { display: grid; grid-template-columns: 84px 1fr; gap: 18px; align-items: start; padding: 12px 0; border-bottom: 1px solid var(--light-grey); }
+  .phase-row:last-child { border-bottom: none; }
+  .phase-num { background: linear-gradient(135deg, var(--blue) 0%, #004d82 100%); color: #fff; padding: 12px 8px; border-radius: 8px; text-align: center; }
+  .phase-num .m { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.75); font-weight: 600; display: block; }
+  .phase-num .n { font-size: 16px; font-weight: 800; color: #fff; display: block; line-height: 1.15; }
+  .phase-content h3 { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
+  .phase-content p { font-size: 11.5px; color: var(--grey); line-height: 1.5; margin-bottom: 4px; }
+  .phase-content ul { list-style: none; }
+  .phase-content li { font-size: 11px; color: #444; padding: 1px 0 1px 16px; position: relative; }
+  .phase-content li::before { content: "\25B8"; color: var(--orange); font-weight: 700; position: absolute; left: 0; top: 0; }
+
+  /* DATA STACK */
+  .stack-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 9px; margin: 4px 0 12px; }
+  .stack-card { background: var(--off-white); border-radius: 8px; padding: 11px 13px; border-bottom: 3px solid var(--teal); }
+  .stack-card:nth-child(3n+1) { border-bottom-color: var(--blue); }
+  .stack-card:nth-child(3n+2) { border-bottom-color: var(--orange); }
+  .stack-card .tool { font-size: 12px; font-weight: 800; color: var(--dark); }
+  .stack-card .use { font-size: 10px; color: var(--grey); line-height: 1.4; }
+
+  /* COMPLIANCE BOX */
+  .compliance-box { background: rgba(246,125,75,0.07); border: 1px solid rgba(246,125,75,0.4); border-left: 5px solid var(--orange); border-radius: 8px; padding: 13px 18px; margin: 8px 0; }
+  .compliance-box h4 { color: #c2531f; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+  .compliance-box p { font-size: 11px; color: #5a3a28; line-height: 1.55; margin-bottom: 5px; }
+  .compliance-box ul { list-style: none; margin: 4px 0 0; }
+  .compliance-box li { font-size: 11px; color: #5a3a28; padding: 2px 0 2px 16px; position: relative; line-height: 1.45; }
+  .compliance-box li::before { content: "\2716"; color: var(--orange); position: absolute; left: 0; font-size: 9px; top: 2px; }
+
+  /* KPI */
+  .kpi-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 11px; margin-top: 8px; }
+  .kpi-card { background: var(--off-white); border-radius: 10px; padding: 16px 14px; text-align: center; border-bottom: 3px solid var(--blue); }
+  .kpi-card:nth-child(2) { border-bottom-color: var(--orange); } .kpi-card:nth-child(3) { border-bottom-color: var(--teal); }
+  .kpi-card:nth-child(4) { border-bottom-color: var(--dark); } .kpi-card:nth-child(5) { border-bottom-color: var(--blue); } .kpi-card:nth-child(6) { border-bottom-color: var(--orange); }
+  .kpi-card .n { font-size: 22px; font-weight: 800; color: var(--blue); line-height: 1; display: block; margin-bottom: 5px; }
+  .kpi-card:nth-child(2) .n { color: var(--orange); } .kpi-card:nth-child(3) .n { color: var(--teal); } .kpi-card:nth-child(4) .n { color: var(--dark); }
+  .kpi-card .l { font-size: 10px; font-weight: 700; color: var(--dark); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; display: block; }
+  .kpi-card .s { font-size: 10px; color: var(--grey); line-height: 1.35; display: block; }
+
+  /* NEXT STEPS / CTA */
+  .next-steps { margin-top: 12px; padding: 18px 24px; background: linear-gradient(135deg, var(--blue) 0%, #004d82 100%); border-radius: 10px; color: #fff; }
+  .next-steps h3 { color: #fff; font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+  .next-steps ol { list-style: none; counter-reset: step; }
+  .next-steps ol li { counter-increment: step; padding: 6px 0 6px 34px; position: relative; font-size: 12px; color: rgba(255,255,255,0.92); line-height: 1.45; }
+  .next-steps ol li::before { content: counter(step); position: absolute; left: 0; top: 5px; background: var(--orange); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+  .cta-banner { margin-top: 14px; padding: 18px 24px; background: var(--dark); color: #fff; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; }
+  .cta-banner .txt h4 { font-size: 15px; color: #fff; font-weight: 700; margin-bottom: 4px; }
+  .cta-banner .txt p { color: rgba(255,255,255,0.7); font-size: 11.5px; margin-bottom: 0; }
+  .cta-banner .contact { text-align: right; font-size: 11.5px; color: rgba(255,255,255,0.8); line-height: 1.55; }
+  .cta-banner .contact .name { color: var(--orange); font-weight: 700; font-size: 12.5px; }
+
+  .lead-note { font-size: 10.5px; color: var(--grey); font-style: italic; margin-top: 6px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="page cover">
+  <div class="cover-inner">
+    <img class="cover-logo" src="file:///c:/vscode/tech-branding/tech-branding/assets/logos/png/technijian-logo-reverse-white-2500x834.png" alt="Technijian">
+    <span class="cover-badge">Investor Acquisition Strategy</span>
+    <h1>Two Engines,<br>Ten <span class="o">Personas</span></h1>
+    <div class="cover-sub">Matching every VisionWise investor persona to the right channel &mdash; Validation SEO/GEO for the searchers, AI-powered outbound for the enumerable.</div>
+    <div class="cover-client">
+      <div class="prep">Prepared For</div>
+      <div class="client">VisionWise Capital</div>
+      <div class="sub">Sanford D. Coggins &middot; 2026 Capital Plan ($10M) &middot; 2027 ($25M)</div>
+    </div>
+  </div>
+  <div class="cover-foot">
+    Prepared May 21, 2026 &nbsp;&middot;&nbsp; <span class="conf">CONFIDENTIAL</span> &nbsp;&middot;&nbsp; Technijian | technology as a solution
+  </div>
+</div>
+
+<!-- PAGE 2: THESIS -->
+<div class="page">
+  <div class="page-head"><img src="file:///c:/vscode/tech-branding/tech-branding/assets/logos/png/technijian-logo-full-color-1200x251.png" alt="Technijian"><span class="page-tag">The Operating Thesis</span></div>
+  <div class="blue-underline"></div>
+  <div class="section-pad">
+    <div class="section-kicker">The Operating Thesis</div>
+    <div class="section-title">One question decides the channel</div>
+    <div class="pull-quote"><span class="q">Can you build a named list of this investor?</span> If yes &mdash; we hunt them with AI-powered outbound. If no &mdash; if they are an anonymous searcher with a problem &mdash; we make sure VisionWise is the answer they find.</div>
+    <div class="engine-split">
+      <div class="engine-card seo">
+        <span class="etag">Engine 1 &middot; Inbound</span>
+        <h3>SEO / GEO</h3>
+        <div class="tagline">Catch the raised hand</div>
+        <p>For investors you <strong>cannot enumerate</strong> &mdash; event-triggered, self-educating people searching Google and asking AI assistants (ChatGPT, Perplexity, AI Overviews).</p>
+        <ul>
+          <li>Validation layer for whales who Google VWC after a touch</li>
+          <li>Educational + GEO capture for searcher personas</li>
+          <li>Runs in the SEO repo &middot; compliance-gated (RIA)</li>
+        </ul>
+      </div>
+      <div class="engine-card ai">
+        <span class="etag">Engine 2 &middot; Outbound</span>
+        <h3>AI Lead Gen</h3>
+        <div class="tagline">Build the list. Reach out.</div>
+        <p>For <strong>finite, enumerable, reachable</strong> universes &mdash; family offices, RIAs, apartment owners, operators &mdash; identified, enriched, and engaged across digital <em>and</em> analog touches.</p>
+        <ul>
+          <li>Apollo &middot; Hunter &middot; ATTOM &middot; BatchData &middot; OpenCorporates</li>
+          <li>LinkedIn Sales Navigator &middot; SEC IAPD &middot; FINTRX</li>
+          <li>AI scoring + personalization &rarr; HubSpot &rarr; SDC closes</li>
+        </ul>
+      </div>
+    </div>
+    <p>VWC's 2026 goal is <strong>$10M raised</strong> ($25M in 2027), anchored by a <strong>$30M revolving line of credit from a single family office</strong>. That anchor is pure outbound &mdash; SEO will never land it. The two engines are complementary: outbound creates awareness; SEO/GEO validates and captures the searchers outbound can't see.</p>
+    <div class="compliance-box">
+      <h4>Guardrail &mdash; VisionWise is a Registered Investment Adviser</h4>
+      <p>Every external word falls under <strong>SEC Marketing Rule 206(4)-1</strong>. Whether we may run lead-<em>capture</em> (vs. brand-only) content turns on the Reg D exemption: <strong>506(b)</strong> = educate only, no solicitation; <strong>506(c)</strong> = solicit verified accredited investors only. Confirm with counsel before any capture activity. No performance claims, no "safe/guaranteed," no forward promises without review.</p>
+    </div>
+  </div>
+  <div class="page-foot">VisionWise Capital &mdash; Investor Acquisition Strategy &nbsp;&middot;&nbsp; <span class="confidential">CONFIDENTIAL</span> &nbsp;&middot;&nbsp; Technijian &nbsp;&middot;&nbsp; 2</div>
+</div>
+
+<!-- PAGE 3: PERSONA MAP -->
+<div class="page">
+  <div class="page-head"><img src="file:///c:/vscode/tech-branding/tech-branding/assets/logos/png/technijian-logo-full-color-1200x251.png" alt="Technijian"><span class="page-tag">The Map</span></div>
+  <div class="blue-underline"></div>
+  <div class="section-pad">
+    <div class="section-kicker">The Map</div>
+    <div class="section-title">Ten personas, two engines</div>
+    <div class="section-subtitle">Each persona is assigned a primary engine and a priority. Three personas run on both &mdash; SEO/GEO catches the investor, outbound recruits the gatekeeper who refers them.</div>
+    <table class="tbl">
+      <thead><tr><th>#</th><th>Persona</th><th>Engine</th><th>Pri.</th><th>First move</th></tr></thead>
+      <tbody>
+        <tr><td class="c">P1</td><td><strong>Family Office</strong> &mdash; the $30M LOC anchor</td><td><span class="pill ai">AI Lead Gen</span></td><td class="c"><span class="pill p0">P0</span></td><td>FOX/Buttonwood list &rarr; dimensional mailer + warm intro</td></tr>
+        <tr><td class="c">P6</td><td><strong>RIA / Advisor</strong></td><td><span class="pill ai">AI Lead Gen</span></td><td class="c"><span class="pill p0">P0</span></td><td>SEC IAPD list &rarr; RIA-to-RIA email + IC briefing</td></tr>
+        <tr><td class="c">P3</td><td><strong>1031 Exchangor</strong></td><td><span class="pill both">Both &mdash; split</span></td><td class="c"><span class="pill p1">P1</span></td><td>GEO/SEO hub for investor + QI partner pack</td></tr>
+        <tr><td class="c">P5</td><td><strong>SDIRA Self-Directed</strong></td><td><span class="pill both">Both &mdash; split</span></td><td class="c"><span class="pill p1">P1</span></td><td>SDIRA education hub + custodian webinar deal</td></tr>
+        <tr><td class="c">P8</td><td><strong>Recently Liquid</strong></td><td><span class="pill both">Both &mdash; split</span></td><td class="c"><span class="pill p1">P1</span></td><td>"Windfall" content + CPA/M&amp;A referral track</td></tr>
+        <tr><td class="c">P2</td><td><strong>HNW CRE Vet</strong> ("Tired Landlord")</td><td><span class="pill ai">AI Lead Gen</span></td><td class="c"><span class="pill p2">P2</span></td><td>ATTOM/BatchData on 15k scrubbed owners &rarr; mail</td></tr>
+        <tr><td class="c">P7</td><td><strong>Tech / Medical</strong> high-income</td><td><span class="pill both">Both &mdash; same person</span></td><td class="c"><span class="pill p2">P2</span></td><td>LinkedIn title-targeting + tax-benefit content</td></tr>
+        <tr><td class="c">P4</td><td><strong>Income Retiree</strong> (net-new only)</td><td><span class="pill seo">SEO / GEO</span></td><td class="c"><span class="pill p2">P2</span></td><td>"Passive income for retirement" education</td></tr>
+        <tr><td class="c">P10</td><td><strong>Co-Sponsor / Operator</strong></td><td><span class="pill ai">AI Lead Gen</span></td><td class="c"><span class="pill p2">P2</span></td><td>LinkedIn + operator forums (GoBundance, BP)</td></tr>
+        <tr><td class="c">P9</td><td><strong>Faith-Based</strong></td><td><span class="pill warm">Warm intro</span></td><td class="c"><span class="pill p2">P3</span></td><td>NCF/Halftime/C12 introductions only &mdash; no cold</td></tr>
+      </tbody>
+    </table>
+    <p class="lead-note">Not shown: the existing <strong>~127 LPs</strong> (~85% repeat, mostly P4). They are neither engine &mdash; they are <strong>CRM nurture</strong> in HubSpot + AppFolio. Do not spend acquisition budget re-acquiring investors VWC already has; recycle their distributions into new deals.</p>
+  </div>
+  <div class="page-foot">VisionWise Capital &mdash; Investor Acquisition Strategy &nbsp;&middot;&nbsp; <span class="confidential">CONFIDENTIAL</span> &nbsp;&middot;&nbsp; Technijian &nbsp;&middot;&nbsp; 3</div>
+</div>
+
+<!-- PAGE 4: SEO/GEO ENGINE -->
+<div class="page">
+  <div class="page-head"><img src="file:///c:/vscode/tech-branding/tech-branding/assets/logos/png/technijian-logo-full-color-1200x251.png" alt="Technijian"><span class="page-tag">Engine 1 &mdash; SEO / GEO</span></div>
+  <div class="blue-underline"></div>
+  <div class="section-pad">
+    <div class="section-kicker">Engine 1 &mdash; SEO / GEO</div>
+    <div class="section-title">Be the answer they find</div>
+    <div class="section-subtitle">Two postures: <strong>validate</strong> the whales who Google VWC after a touch, and <strong>capture</strong> the searcher personas at their moment of need (gated by the Reg D exemption). Full keyword + GEO clusters live in the SEO repo persona doc.</div>
+    <div class="mini-grid">
+      <div class="mini-card"><h4>P3 &mdash; 1031 Exchangor</h4><span class="who">Capture &middot; flagship</span><p>On a 45-day clock, searching urgently. We rank + get cited for the replacement-property question; Sidecar is 1031-eligible.</p><p class="q">"Can I 1031 into an apartment syndication closing this month?"</p></div>
+      <div class="mini-card"><h4>P5 &mdash; SDIRA Investor</h4><span class="who">Capture</span><p>Self-educators with IRA cash "doing nothing." Own the SDIRA-in-real-estate + UBIT explainers; feed custodian webinars.</p><p class="q">"How do I invest my IRA in an apartment building?"</p></div>
+      <div class="mini-card"><h4>P8 &mdash; Recently Liquid</h4><span class="who">Capture</span><p>Just sold a business / inherited. Bewildered, asking AI. Own the "first 12 months after a windfall" playbook.</p><p class="q">"I sold my company for $5M &mdash; how should I invest it?"</p></div>
+      <div class="mini-card"><h4>P7 &mdash; Tech / Medical</h4><span class="who">Capture (+ outbound)</span><p>Research tax/depreciation heavily. Honest "passive RE for high earners" content; LinkedIn runs in parallel.</p><p class="q">"How can a physician cut taxes with real estate?"</p></div>
+      <div class="mini-card"><h4>P4 &mdash; Income Retiree</h4><span class="who">Educate (net-new)</span><p>Searching for income alternatives. Repurpose SDC's "REITs vs direct" blog. Existing LPs excluded &mdash; they're nurture.</p><p class="q">"Best tax-advantaged income outside the stock market?"</p></div>
+      <div class="mini-card"><h4>P1 &amp; P6 &mdash; Whales</h4><span class="who">Validate only</span><p>Family Offices &amp; RIAs don't search for sponsors. SERP must own the brand, knowledge panels, institutional long-tail, REIT-conquesting.</p><p class="q">Branded + "sub-50 LTV multifamily fund"</p></div>
+    </div>
+    <div class="compliance-box" style="margin-top:12px;">
+      <h4>The capture track is gated</h4>
+      <p>Under <strong>506(b)</strong>, the searcher pages are <strong>education + brand authority only</strong> (no offering CTA, gated). Under <strong>506(c)</strong>, they become true lead-capture <strong>with accredited-investor verification</strong>. GEO amplifies risk &mdash; AI engines quote pages out of context, so no extractable performance/forward claim. Counsel reviews every template.</p>
+    </div>
+  </div>
+  <div class="page-foot">VisionWise Capital &mdash; Investor Acquisition Strategy &nbsp;&middot;&nbsp; <span class="confidential">CONFIDENTIAL</span> &nbsp;&middot;&nbsp; Technijian &nbsp;&middot;&nbsp; 4</div>
+</div>
+
+<!-- PAGE 5: AI LEAD GEN — DIGITAL -->
+<div class="page">
+  <div class="page-head"><img src="file:///c:/vscode/tech-branding/tech-branding/assets/logos/png/technijian-logo-full-color-1200x251.png" alt="Technijian"><span class="page-tag">Engine 2 &mdash; AI Lead Gen &middot; Digital</span></div>
+  <div class="blue-underline"></div>
+  <div class="section-pad">
+    <div class="section-kicker">Engine 2 &mdash; AI Lead Gen &middot; Digital</div>
+    <div class="section-title">Build the list. Reach the inbox.</div>
+    <div class="section-subtitle">A repeatable machine: identify a finite universe, enrich it, verify it, let AI score fit and personalize at scale, then run multi-touch sequences into HubSpot for SDC to close.</div>
+    <div class="stack-grid">
+      <div class="stack-card"><span class="tool">SEC IAPD</span><div class="use">Free Form ADV &mdash; every RIA by AUM/geo (P6)</div></div>
+      <div class="stack-card"><span class="tool">FINTRX</span><div class="use">Verified family-office CIO contacts + mandates (P1)</div></div>
+      <div class="stack-card"><span class="tool">Apollo</span><div class="use">B2B contacts, emails, firmographics (P6/P7)</div></div>
+      <div class="stack-card"><span class="tool">Hunter</span><div class="use">Email discovery + deliverability verification</div></div>
+      <div class="stack-card"><span class="tool">ATTOM</span><div class="use">Apartment-owner property data &amp; value (P2)</div></div>
+      <div class="stack-card"><span class="tool">BatchData</span><div class="use">Owner skip-trace / contact append (P2)</div></div>
+      <div class="stack-card"><span class="tool">OpenCorporates</span><div class="use">Entity &amp; officer data behind LLCs/offices</div></div>
+      <div class="stack-card"><span class="tool">LinkedIn Sales Nav</span><div class="use">Title/firm/geo targeting, social selling (P6/P7/P10)</div></div>
+      <div class="stack-card"><span class="tool">HubSpot</span><div class="use">CRM + sequences &mdash; the destination of record</div></div>
+    </div>
+    <div class="phase-timeline">
+      <div class="phase-row"><div class="phase-num"><span class="m">Step</span><span class="n">1&ndash;2</span></div><div class="phase-content"><h3>Identify &amp; enrich</h3><p>Pull the finite universe (IAPD, FINTRX, ATTOM). AI scores each record for ICP fit; Apollo/Hunter/BatchData append + verify contacts. 100 verified targets beat 5,000 unverified.</p></div></div>
+      <div class="phase-row"><div class="phase-num"><span class="m">Step</span><span class="n">3</span></div><div class="phase-content"><h3>Personalize at scale (AI)</h3><p>AI drafts persona-calibrated, SDC-voice copy referencing the specific firm/property/event &mdash; reviewed, never auto-sent. Compliance-checked templates.</p></div></div>
+      <div class="phase-row"><div class="phase-num"><span class="m">Step</span><span class="n">4</span></div><div class="phase-content"><h3>Multi-touch sequence</h3><p>LinkedIn connect (no pitch) &rarr; value email &rarr; proof (track record / case study) &rarr; invite. Email infra on a dedicated domain (SPF/DKIM/DMARC) for family-office deliverability.</p></div></div>
+      <div class="phase-row"><div class="phase-num"><span class="m">Step</span><span class="n">5</span></div><div class="phase-content"><h3>Route &amp; close</h3><p>Engaged leads flow to HubSpot; SDC and team take the meeting. AppFolio handles post-investment IR &mdash; we don't duplicate it.</p></div></div>
+    </div>
+    <p class="lead-note"><strong>Digital tactics by persona:</strong> P6 RIA &mdash; IAPD+Apollo, RIA-to-RIA email, IC pre-read. P1 &mdash; FINTRX, hyper-personalized email to warm the intro. P7 &mdash; LinkedIn Sales Nav by title/specialty + tax content retarget (first-party only). P2 &mdash; property-data mail-match + email append. P10 &mdash; LinkedIn "Managing Partner + RE" outside SoCal. CP1/CP2 &mdash; partnership outreach to QIs &amp; custodians.</p>
+  </div>
+  <div class="page-foot">VisionWise Capital &mdash; Investor Acquisition Strategy &nbsp;&middot;&nbsp; <span class="confidential">CONFIDENTIAL</span> &nbsp;&middot;&nbsp; Technijian &nbsp;&middot;&nbsp; 5</div>
+</div>
+
+<!-- PAGE 6: AI LEAD GEN — ANALOG -->
+<div class="page">
+  <div class="page-head"><img src="file:///c:/vscode/tech-branding/tech-branding/assets/logos/png/technijian-logo-full-color-1200x251.png" alt="Technijian"><span class="page-tag">Engine 2 &mdash; AI Lead Gen &middot; Analog</span></div>
+  <div class="blue-underline"></div>
+  <div class="section-pad">
+    <div class="section-kicker">Engine 2 &mdash; AI Lead Gen &middot; Analog</div>
+    <div class="section-title">The touches that close eight figures</div>
+    <div class="section-subtitle">Family-office and RIA capital is won offline. Digital warms and validates; analog converts. Every analog touch is logged back to HubSpot so the two engines share one pipeline.</div>
+    <div class="mini-grid three">
+      <div class="mini-card"><h4>Dimensional mailers</h4><span class="who">P1 &middot; P2</span><p>Physical, premium leave-behind to the top 50 family offices &amp; high-value owners &mdash; cuts through a screened inbox. Counsel-reviewed creative.</p></div>
+      <div class="mini-card"><h4>Conferences</h4><span class="who">P1 &middot; P5 &middot; P10</span><p>Built around the 4 confirmed converters: <strong>FOX, Buttonwood, TNDDA, Fact&nbsp;Right</strong>. Speaking &gt; attending.</p></div>
+      <div class="mini-card"><h4>Private briefings</h4><span class="who">P1 &middot; P6 &middot; P8</span><p>Intimate investor dinners &amp; IC briefings &mdash; the room where allocators decide. Bring CPA/attorney for P8.</p></div>
+      <div class="mini-card"><h4>Handwritten notes</h4><span class="who">P1 &middot; P9</span><p>Post-intro, post-meeting. Signals the "investors over projects" character that values-driven LPs screen for.</p></div>
+      <div class="mini-card"><h4>COI / referral</h4><span class="who">CP1 &middot; CP2 &middot; CP3</span><p>QIs, CPAs, custodians, and faith networks (NCF/Halftime/C12). One relationship = recurring warm flow.</p></div>
+      <div class="mini-card"><h4>15k-owner direct mail</h4><span class="who">P2</span><p>VWC's scrubbed apartment-owner list &mdash; the "done being a landlord?" letter, mail-matched to ATTOM data.</p></div>
+      <div class="mini-card"><h4>Custodian webinars</h4><span class="who">P5 &middot; CP2</span><p>Get on Equity Trust / STRATA / Quest education circuits &mdash; hundreds of warm SDIRA holders per session.</p></div>
+      <div class="mini-card"><h4>Phone</h4><span class="who">P2 &middot; P3 &middot; P10</span><p>For time-pressured (1031) and operator-to-operator (P10) conversations &mdash; fast, direct, high-trust.</p></div>
+      <div class="mini-card"><h4>Roundtables</h4><span class="who">P6</span><p>Closed-door RIA roundtables on RIA-friendly RE alternatives &mdash; SDC's Merrill pedigree is the draw.</p></div>
+    </div>
+    <p class="lead-note"><strong>The split that matters:</strong> for P1 (the LOC anchor), <strong>analog is primary</strong> &mdash; the wire follows a dinner and a binder, not an email. Digital exists to make the analog touch land warm and to ensure the post-touch Google search confirms institutional quality (Engine 1).</p>
+  </div>
+  <div class="page-foot">VisionWise Capital &mdash; Investor Acquisition Strategy &nbsp;&middot;&nbsp; <span class="confidential">CONFIDENTIAL</span> &nbsp;&middot;&nbsp; Technijian &nbsp;&middot;&nbsp; 6</div>
+</div>
+
+<!-- PAGE 7: PLAYBOOK MATRIX A -->
+<div class="page">
+  <div class="page-head"><img src="file:///c:/vscode/tech-branding/tech-branding/assets/logos/png/technijian-logo-full-color-1200x251.png" alt="Technijian"><span class="page-tag">The Playbook &middot; 1 of 2</span></div>
+  <div class="blue-underline"></div>
+  <div class="section-pad">
+    <div class="section-kicker">The Playbook</div>
+    <div class="section-title">How we go after each persona</div>
+    <div class="section-subtitle">Priority personas P1&ndash;P5. Digital + analog plays, the first asset to lead with, and the metric we hold ourselves to.</div>
+    <table class="tbl">
+      <thead><tr><th>Persona</th><th>Engine</th><th>Digital</th><th>Analog</th><th>First asset</th><th>KPI</th></tr></thead>
+      <tbody>
+        <tr><td><strong>P1</strong> Family Office</td><td><span class="pill ai">Outbound</span></td><td>FINTRX list, hyper-personal email, LinkedIn warm-path</td><td>Dimensional mailer, FOX/Buttonwood, dinner, binder</td><td>LOC structure brief + track record 1-pager</td><td>Meetings booked; LOC term sheets</td></tr>
+        <tr><td><strong>P6</strong> RIA / Advisor</td><td><span class="pill ai">Outbound</span></td><td>IAPD+Apollo, RIA-to-RIA email, IC pre-read</td><td>Closed-door roundtables, FPA deck</td><td>FPA presentation + SDC bio</td><td>IC briefings; first placements</td></tr>
+        <tr><td><strong>P3</strong> 1031 Exchangor</td><td><span class="pill both">Both</span></td><td>GEO/SEO 1031 hub, FAQ schema, retarget</td><td>QI partner pack, phone (clock-driven)</td><td>1031 explainer + active offering summary</td><td>Organic 1031 leads; QI referrals</td></tr>
+        <tr><td><strong>P5</strong> SDIRA Investor</td><td><span class="pill both">Both</span></td><td>SDIRA + UBIT education hub, custodian-page SEO</td><td>Custodian webinar circuit (Equity Trust&hellip;)</td><td>SDIRA subscription packet + direct-deal 1-pager</td><td>Webinar slots; SDIRA subscriptions</td></tr>
+        <tr><td><strong>P8</strong> Recently Liquid</td><td><span class="pill both">Both</span></td><td>"Windfall" GEO content, advisor-co-branded pages</td><td>CPA / M&amp;A / estate-attorney referral track</td><td>"First 12 months" liquidity playbook</td><td>Referrals from CP1; conversations</td></tr>
+      </tbody>
+    </table>
+    <p class="lead-note">P1 and P6 are <strong>outbound-primary</strong> (SEO only validates them). P3/P5/P8 are the <strong>split-target</strong> personas: SEO/GEO catches the end investor in the moment of need while outbound builds the gatekeeper relationships (QIs, custodians, CPAs) that refer the same people in volume.</p>
+  </div>
+  <div class="page-foot">VisionWise Capital &mdash; Investor Acquisition Strategy &nbsp;&middot;&nbsp; <span class="confidential">CONFIDENTIAL</span> &nbsp;&middot;&nbsp; Technijian &nbsp;&middot;&nbsp; 7</div>
+</div>
+
+<!-- PAGE 8: PLAYBOOK MATRIX B -->
+<div class="page">
+  <div class="page-head"><img src="file:///c:/vscode/tech-branding/tech-branding/assets/logos/png/technijian-logo-full-color-1200x251.png" alt="Technijian"><span class="page-tag">The Playbook &middot; 2 of 2</span></div>
+  <div class="blue-underline"></div>
+  <div class="section-pad">
+    <div class="section-kicker">The Playbook</div>
+    <div class="section-title">&hellip;continued &mdash; P2, P7, P4, P10, P9 + partners</div>
+    <table class="tbl">
+      <thead><tr><th>Persona</th><th>Engine</th><th>Digital</th><th>Analog</th><th>First asset</th><th>KPI</th></tr></thead>
+      <tbody>
+        <tr><td><strong>P2</strong> HNW CRE Vet</td><td><span class="pill ai">Outbound</span></td><td>ATTOM/BatchData mail-match, email append</td><td>15k-owner "done being a landlord?" mail, phone</td><td>Sidecar 1-pager + Charlene case study</td><td>Owner replies; sidecar subs</td></tr>
+        <tr><td><strong>P7</strong> Tech / Medical</td><td><span class="pill both">Both</span></td><td>LinkedIn by title/specialty + tax-benefit content</td><td>Assn. talks (AMA/ADA), podcast guesting</td><td>RE tax-benefits 1-pager + direct deal</td><td>Organic + LinkedIn leads</td></tr>
+        <tr><td><strong>P4</strong> Income Retiree <span style="color:var(--grey)">(net-new)</span></td><td><span class="pill seo">SEO</span></td><td>"Passive income" + REITs-vs-direct content</td><td>Bisnow/IMN presence (light)</td><td>"REITs vs direct" + distribution history</td><td>Organic income-seeker leads</td></tr>
+        <tr><td><strong>P10</strong> Co-Sponsor</td><td><span class="pill ai">Outbound</span></td><td>LinkedIn "Mng Partner + RE" outside SoCal</td><td>GoBundance, IMN, Best Ever Conf</td><td>Underwriting sample + vertical-integration story</td><td>Operator co-invests</td></tr>
+        <tr><td><strong>P9</strong> Faith-Based</td><td><span class="pill warm">Warm</span></td><td>Values content (credibility only, no capture)</td><td><strong>NCF / Halftime / C12 intros only</strong></td><td>Core Values doc + SDC bio</td><td>Warm intros received</td></tr>
+        <tr><td><strong>CP1</strong> CPA/QI/Attorney</td><td><span class="pill ai">Outbound</span></td><td>Targeted email + co-branded explainers</td><td>Quarterly update + annual briefing invite</td><td>"Trusted-sponsor" partner pack</td><td>Referrals generated</td></tr>
+        <tr><td><strong>CP2</strong> SDIRA Custodian</td><td><span class="pill ai">Outbound</span></td><td>Sponsor brief to education teams</td><td>Webinar partnership pitch</td><td>30-min custodian intro deck</td><td>Webinars booked</td></tr>
+        <tr><td><strong>CP3</strong> Faith networks</td><td><span class="pill warm">Warm</span></td><td>&mdash; (referral, not digital)</td><td>Relationship-led intros to P9</td><td>Stewardship/character story</td><td>Intros into P9</td></tr>
+      </tbody>
+    </table>
+    <p class="lead-note">Channel partners (CP1&ndash;CP3) are gatekeepers, not investors &mdash; but they are the highest-leverage targets: one custodian webinar or one trusted CPA can deliver a recurring stream of P3/P5/P8 investors at near-zero marginal cost.</p>
+  </div>
+  <div class="page-foot">VisionWise Capital &mdash; Investor Acquisition Strategy &nbsp;&middot;&nbsp; <span class="confidential">CONFIDENTIAL</span> &nbsp;&middot;&nbsp; Technijian &nbsp;&middot;&nbsp; 8</div>
+</div>
+
+<!-- PAGE 9: 90-DAY ACTIVATION -->
+<div class="page">
+  <div class="page-head"><img src="file:///c:/vscode/tech-branding/tech-branding/assets/logos/png/technijian-logo-full-color-1200x251.png" alt="Technijian"><span class="page-tag">Activation</span></div>
+  <div class="blue-underline"></div>
+  <div class="section-pad">
+    <div class="section-kicker">Activation</div>
+    <div class="section-title">The first 90 days</div>
+    <div class="section-subtitle">Sequenced so the highest-value, lowest-friction capital moves first &mdash; while the compounding SEO/GEO assets are built in parallel.</div>
+    <div class="phase-timeline">
+      <div class="phase-row"><div class="phase-num"><span class="m">Weeks</span><span class="n">1&ndash;2</span></div><div class="phase-content"><h3>Foundation</h3><ul><li>Confirm 506(b) vs 506(c) with counsel &mdash; unlocks (or gates) the SEO capture track</li><li>Stand up enrichment stack + dedicated outbound email domain</li><li>Build the P1 (FINTRX) and P6 (IAPD) target lists; AI-score for fit</li></ul></div></div>
+      <div class="phase-row"><div class="phase-num"><span class="m">Weeks</span><span class="n">3&ndash;6</span></div><div class="phase-content"><h3>Outbound live + content drafted</h3><ul><li>Launch P6 RIA + P1 family-office digital sequences (warm the intro)</li><li>Draft SEO/GEO hubs (1031, SDIRA, windfall) + 5 case studies &rarr; counsel</li><li>Open QI &amp; custodian (CP1/CP2) partnership conversations</li></ul></div></div>
+      <div class="phase-row"><div class="phase-num"><span class="m">Weeks</span><span class="n">7&ndash;12</span></div><div class="phase-content"><h3>Analog + capture online</h3><ul><li>Dimensional mailers to top-50 family offices; 15k-owner mail (P2)</li><li>Publish counsel-approved GEO hubs + case studies on the alpha site</li><li>First custodian webinar booked; first private briefing scheduled</li></ul></div></div>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi-card"><span class="n">8&ndash;12</span><span class="l">Qualified convos / mo</span><span class="s">SDC-ready, by end of Q1 (confirm target)</span></div>
+      <div class="kpi-card"><span class="n">250</span><span class="l">Verified targets</span><span class="s">P1 + P6, fully enriched</span></div>
+      <div class="kpi-card"><span class="n">5</span><span class="l">GEO hubs live</span><span class="s">1031, SDIRA, windfall, tax, income</span></div>
+      <div class="kpi-card"><span class="n">2&ndash;3</span><span class="l">Partner channels</span><span class="s">QIs / custodians in motion</span></div>
+      <div class="kpi-card"><span class="n">100%</span><span class="l">Branded SERP</span><span class="s">owned/authoritative (Engine 1)</span></div>
+      <div class="kpi-card"><span class="n">0</span><span class="l">Compliance incidents</span><span class="s">the non-negotiable metric</span></div>
+    </div>
+  </div>
+  <div class="page-foot">VisionWise Capital &mdash; Investor Acquisition Strategy &nbsp;&middot;&nbsp; <span class="confidential">CONFIDENTIAL</span> &nbsp;&middot;&nbsp; Technijian &nbsp;&middot;&nbsp; 9</div>
+</div>
+
+<!-- PAGE 10: COMPLIANCE + NEXT STEPS -->
+<div class="page">
+  <div class="page-head"><img src="file:///c:/vscode/tech-branding/tech-branding/assets/logos/png/technijian-logo-full-color-1200x251.png" alt="Technijian"><span class="page-tag">Guardrails &amp; Next Steps</span></div>
+  <div class="blue-underline"></div>
+  <div class="section-pad">
+    <div class="section-kicker">Guardrails</div>
+    <div class="section-title">Compliance is the strategy, not a footnote</div>
+    <div class="compliance-box">
+      <h4>Hard rules (VWC is an RIA)</h4>
+      <ul>
+        <li>No performance claim, forward-looking return, or "safe / guaranteed / no-risk" language without outside-counsel review</li>
+        <li>506(b) = educate only, gated, no solicitation &middot; 506(c) = solicit verified accredited investors only</li>
+        <li>Accredited-investor verification gates any offering action; case-study performance stays counsel-reviewed</li>
+        <li>No aggressive tracking / retargeting to consumer audiences; first-party, privacy-grade only</li>
+        <li>Track record shown in full &mdash; including the disclosed loss; no cherry-picking</li>
+      </ul>
+    </div>
+    <div class="next-steps">
+      <h3>What we need from VisionWise</h3>
+      <ol>
+        <li><strong>Confirm the Reg D exemption</strong> (506(b) vs 506(c)) with counsel &mdash; the single decision that unlocks the SEO capture track.</li>
+        <li><strong>Ratify persona priorities</strong> &mdash; confirm P1 (LOC) + P6 + the P3/P5/P8 split as the Q1 focus.</li>
+        <li><strong>Grant tool + data access</strong> &mdash; HubSpot, LinkedIn admin, FINTRX budget, and the 15k-owner list.</li>
+        <li><strong>Name the compliance counsel</strong> for the content-review SLA.</li>
+        <li><strong>Approve the alpha-site case studies</strong> for counsel review &rarr; publish.</li>
+      </ol>
+    </div>
+    <div class="cta-banner">
+      <div class="txt"><h4>Let's turn the map into pipeline.</h4><p>Two engines, ten personas, one shared HubSpot pipeline.</p></div>
+      <div class="contact"><span class="name">Technijian</span><br>technology as a solution<br>RJain@technijian.com &middot; technijian.com</div>
+    </div>
+    <p class="lead-note" style="margin-top:14px;">Companion artifacts: SEO/GEO persona &amp; keyword map and 5 alpha-site case studies are filed in the VWC SEO repo (<em>visionwisecapital.com / 01_Deep_Discovery &amp; 03_Content_Production</em>). This report is the cross-channel strategy that governs both engines.</p>
+  </div>
+  <div class="page-foot">VisionWise Capital &mdash; Investor Acquisition Strategy &nbsp;&middot;&nbsp; <span class="confidential">CONFIDENTIAL</span> &nbsp;&middot;&nbsp; Technijian &nbsp;&middot;&nbsp; 10</div>
+</div>
+
+</body>
+</html>
