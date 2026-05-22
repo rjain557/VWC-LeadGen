@@ -31,7 +31,7 @@ Everything below assumes the **same lean "design → build → hand-off" scope**
 | **Project type** | AI-Lead-Gen (fixed cost) |
 | **MSA reference** | None — standalone SOW. **NDA-VWC-001 in effect** (governs NPI/confidentiality). |
 | **Effective date** | Date of last signature (target 2026-05-21) |
-| **Compliance flags** | SEC Reg D 506(b)/506(c), SEC Marketing Rule, CAN-SPAM, TCPA, state solicitation. VWC is an RIA. |
+| **Compliance flags** | Reg D Rule 506(c) (accredited-only, verified); securities anti-fraud rules (Rule 10b-5); CAN-SPAM; TCPA; state blue-sky notices. VWC is **not** an RIA. |
 | **Pricing model** | **FIXED COST** (Section 5.2 "Fixed Cost" type — Technijian completes at stated price regardless of hours) |
 | **Signer (Technijian)** | Ravi Jain, CEO |
 | **Resource** | Ravi Jain (CTO/AI Advisory); offshore dev support where applicable |
@@ -62,7 +62,7 @@ All work performed remotely unless both Parties agree in writing to on-site pres
 ## 2. SCOPE OF WORK
 
 ### 2.1 In Scope (fixed-price deliverables)
-- **Discovery & Strategy** — confirm target personas, TAM, channel mix, success metrics, and compliance guardrails (506(b)/506(c), CAN-SPAM, TCPA, state solicitation).
+- **Discovery & Strategy** — confirm target personas, TAM, channel mix, success metrics, and compliance guardrails (Reg D 506(c), CAN-SPAM, TCPA, state solicitation).
 - **Architecture & Tool Selection** — design the AI lead-gen stack: LLM selection, data/enrichment sources (Apollo, Hunter, ATTOM, BatchData, OpenCorporates, SEC IAPD, FINTRX), CRM integration (HubSpot), orchestration (n8n/Make/custom).
 - **Data Pipeline & Enrichment** — build/configure ingestion + enrichment that pulls prospective investor/RIA/partner records, normalizes them, and appends firmographic/wealth-screening attributes.
 - **AI Scoring & Qualification** — LLM-assisted fit/likelihood scoring with auditable reasoning summaries.
@@ -166,7 +166,7 @@ Net 30 days from invoice date. Standard late-payment / acceleration / suspension
 (b) Designate one empowered point of contact (default: Sanford Coggins) to approve scope, spend, vendor selection, outreach go-live.
 (c) Review and approve deliverables within **five (5) business days** of submission.
 (d) Procure and pay for all third-party services directly (LLM APIs, enrichment, CRM, sending infrastructure).
-(e) Ensure all outreach content complies with applicable law (SEC 506(b)/506(c), CAN-SPAM, TCPA, state solicitation) before send. Technijian is not a law firm and provides no legal/compliance advice.
+(e) Ensure all outreach content complies with applicable law (Reg D 506(c), CAN-SPAM, TCPA, state solicitation) before send. Technijian is not a law firm and provides no legal/compliance advice.
 (f) Not use the system or its output for any activity requiring a securities license unless VWC (or a licensed affiliate) holds the requisite license.
 (g) Inform internal stakeholders of workflow-affecting changes.
 

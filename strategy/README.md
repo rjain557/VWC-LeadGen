@@ -15,4 +15,4 @@ Matches the Technijian house style from the SEO proposal (`seo-sdlc/.../VWC/.../
 - **Alpha-site case studies (5 + README):** `…/03_Content_Production/case-studies/`
 
 ## Compliance
-VWC is a Registered Investment Adviser. The report's recommendations (esp. SEO lead-capture) are gated on the Reg D exemption (506(b) vs 506(c)) and SEC Marketing Rule review. Case studies are DRAFT pending outside-counsel review. See the engagement brief §0.
+VWC is **not** a registered investment adviser; it is a private real estate sponsor issuing its own securities under **Reg D Rule 506(c)** (general solicitation permitted; accredited investors only, verified). The report's recommendations remain subject to securities anti-fraud rules and counsel review. Case studies are DRAFT pending outside-counsel review.

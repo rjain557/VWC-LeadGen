@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VWC AI Lead Gen — Development Overview — Technijian</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#006DB6; --orange:#F67D4B; --teal:#1EAAC8; --chartreuse:#CBDB2D;
+    --dark:#1A1A2E; --near-black:#2D2D2D; --grey:#59595B; --light-grey:#E9ECEF; --off-white:#F8F9FA; --green:#2E7D32;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  @page{size:letter;margin:0;}
+  body{font-family:'Open Sans',sans-serif;color:#333;font-size:14px;line-height:1.5;background:#fff;}
+  .page{width:8.5in;height:11in;position:relative;overflow:hidden;page-break-after:always;background:#fff;}
+  .page:last-child{page-break-after:auto;}
+  .section-pad{padding:26px 56px 0;}
+  .page-head{display:flex;justify-content:space-between;align-items:center;padding:20px 56px 0;}
+  .page-head img{height:24px;}
+  .page-head .page-tag{font-size:9.5px;font-weight:700;color:var(--grey);text-transform:uppercase;letter-spacing:2px;}
+  .blue-underline{height:3px;background:linear-gradient(90deg,var(--blue) 0%,var(--teal) 60%,var(--orange) 100%);margin:10px 56px 0;}
+  .page-foot{position:absolute;bottom:0;left:0;right:0;background:var(--near-black);text-align:center;padding:7px;font-size:8.5px;color:rgba(255,255,255,0.45);}
+  .page-foot .confidential{color:var(--orange);font-weight:600;letter-spacing:1px;}
+  h1,h2,h3{color:var(--dark);}
+  .section-kicker{font-size:10.5px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:2px;margin-bottom:7px;}
+  .section-title{font-size:25px;font-weight:800;color:var(--dark);margin-bottom:6px;letter-spacing:-0.5px;line-height:1.1;}
+  .section-subtitle{font-size:12.5px;color:var(--grey);margin-bottom:15px;line-height:1.5;max-width:660px;}
+  p{color:#333;font-size:12.5px;line-height:1.6;margin-bottom:10px;}
+  strong{color:var(--dark);font-weight:700;}
+
+  /* COVER */
+  .cover{background:linear-gradient(135deg,var(--dark) 0%,#0a1628 55%,#0d2847 100%);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+  .cover::before{content:'';position:absolute;top:-120px;right:-80px;width:420px;height:420px;background:radial-gradient(circle,rgba(30,170,200,0.14) 0%,transparent 70%);border-radius:50%;}
+  .cover::after{content:'';position:absolute;bottom:-100px;left:8%;width:380px;height:380px;background:radial-gradient(circle,rgba(246,125,75,0.10) 0%,transparent 70%);border-radius:50%;}
+  .cover-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;max-width:720px;padding:0 40px;}
+  .cover-logo{height:62px;margin-bottom:34px;}
+  .cover-badge{font-size:10px;color:var(--teal);border:1px solid rgba(30,170,200,0.45);background:rgba(30,170,200,0.14);padding:7px 22px;border-radius:18px;text-transform:uppercase;letter-spacing:2.5px;font-weight:700;display:inline-block;margin-bottom:26px;}
+  .cover h1{font-size:46px;font-weight:800;line-height:1.05;margin-bottom:18px;color:#fff;letter-spacing:-1px;}
+  .cover h1 .o{color:var(--orange);}
+  .cover-sub{font-size:15.5px;color:rgba(255,255,255,0.75);font-weight:300;margin-bottom:36px;line-height:1.55;}
+  .cover-client{margin:12px 0 0;padding-top:22px;border-top:1px solid rgba(255,255,255,0.12);width:100%;}
+  .cover-client .prep{font-size:10.5px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:9px;}
+  .cover-client .client{font-size:23px;font-weight:700;color:#fff;margin-bottom:6px;}
+  .cover-client .sub{font-size:12.5px;color:rgba(255,255,255,0.6);}
+  .cover-foot{position:absolute;bottom:26px;width:100%;text-align:center;font-size:10.5px;color:rgba(255,255,255,0.4);z-index:1;letter-spacing:0.5px;}
+  .cover-foot .conf{color:var(--orange);font-weight:600;letter-spacing:1.5px;}
+
+  .pull-quote{background:var(--off-white);border-left:4px solid var(--orange);padding:15px 22px;border-radius:4px;margin:12px 0 14px;font-size:13.5px;color:var(--dark);line-height:1.5;font-weight:500;}
+  .pull-quote .q{color:var(--blue);font-weight:700;}
+
+  .pipeline{display:flex;align-items:stretch;margin:10px 0 12px;}
+  .pipeline .step{flex:1;background:var(--off-white);border:1px solid var(--light-grey);border-top:3px solid var(--blue);border-radius:8px;padding:10px 6px;text-align:center;}
+  .pipeline .step:nth-child(4n+1){border-top-color:var(--teal);}
+  .pipeline .step:nth-child(4n+3){border-top-color:var(--orange);}
+  .pipeline .step .n{font-size:10px;font-weight:800;color:var(--dark);display:block;line-height:1.15;}
+  .pipeline .step .d{font-size:8px;color:var(--grey);line-height:1.3;display:block;margin-top:3px;}
+  .pipeline .arr{display:flex;align-items:center;color:var(--orange);font-weight:800;padding:0 2px;font-size:12px;}
+
+  .tbl{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:11px;}
+  .tbl thead th{background:var(--blue);color:#fff;text-align:left;padding:7px 10px;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:0.5px;}
+  .tbl td{padding:6px 10px;border-bottom:1px solid var(--light-grey);vertical-align:top;color:#333;line-height:1.4;}
+  .tbl tbody tr:nth-child(even){background:var(--off-white);}
+
+  .mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px;}
+  .mini-grid.three{grid-template-columns:1fr 1fr 1fr;}
+  .mini-card{background:#fff;border:1px solid var(--light-grey);border-radius:9px;padding:11px 13px;border-left:4px solid var(--blue);}
+  .mini-card:nth-child(3n+2){border-left-color:var(--orange);}
+  .mini-card:nth-child(3n){border-left-color:var(--teal);}
+  .mini-card h4{font-size:12px;font-weight:700;color:var(--dark);margin-bottom:3px;}
+  .mini-card .who{font-size:9px;color:var(--grey);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;display:block;}
+  .mini-card p{font-size:10.5px;color:#444;line-height:1.45;margin-bottom:0;}
+
+  .phase-timeline{margin-top:6px;}
+  .phase-row{display:grid;grid-template-columns:128px 1fr;gap:18px;align-items:start;padding:10px 0;border-bottom:1px solid var(--light-grey);}
+  .phase-row:last-child{border-bottom:none;}
+  .phase-num{background:linear-gradient(135deg,var(--blue) 0%,#004d82 100%);color:#fff;padding:10px 8px;border-radius:8px;text-align:center;}
+  .phase-num .m{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,0.75);font-weight:600;display:block;}
+  .phase-num .n{font-size:15px;font-weight:800;color:#fff;display:block;line-height:1.15;}
+  .phase-content h3{font-size:13.5px;font-weight:700;color:var(--dark);margin-bottom:3px;}
+  .phase-content .obj{font-size:11px;color:var(--grey);line-height:1.5;margin-bottom:5px;}
+  .phase-content ul{list-style:none;}
+  .phase-content li{font-size:10.5px;color:#444;padding:1px 0 1px 15px;position:relative;}
+  .phase-content li::before{content:"\25B8";color:var(--orange);font-weight:700;position:absolute;left:0;top:0;}
+
+  .stack-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:4px 0 10px;}
+  .stack-card{background:var(--off-white);border-radius:8px;padding:9px 12px;border-bottom:3px solid var(--teal);}
+  .stack-card:nth-child(3n+1){border-bottom-color:var(--blue);}
+  .stack-card:nth-child(3n+2){border-bottom-color:var(--orange);}
+  .stack-card .tool{font-size:11px;font-weight:800;color:var(--dark);display:block;}
+  .stack-card .use{font-size:9px;color:var(--grey);line-height:1.3;}
+
+  .server-band{background:linear-gradient(135deg,var(--dark) 0%,#2a1f3a 100%);border-radius:10px;padding:13px 18px;margin:8px 0 10px;color:#fff;}
+  .server-band .lbl{font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--chartreuse);font-weight:700;margin-bottom:7px;display:block;}
+  .server-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;}
+  .server-grid .c{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:8px 10px;}
+  .server-grid .c .t{font-size:11px;font-weight:800;color:#fff;display:block;}
+  .server-grid .c .d{font-size:8.5px;color:rgba(255,255,255,0.7);line-height:1.3;display:block;margin-top:2px;}
+  .server-band .extra{font-size:9.5px;color:rgba(255,255,255,0.82);margin-top:9px;line-height:1.4;}
+  .server-band .extra b{color:var(--teal);}
+
+  .compliance-box{background:rgba(246,125,75,0.07);border:1px solid rgba(246,125,75,0.4);border-left:5px solid var(--orange);border-radius:8px;padding:12px 18px;margin:8px 0;}
+  .compliance-box h4{color:#c2531f;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;}
+  .compliance-box ul{list-style:none;margin:4px 0 0;}
+  .compliance-box li{font-size:10.5px;color:#5a3a28;padding:2px 0 2px 16px;position:relative;line-height:1.4;}
+  .compliance-box li::before{content:"\2714";color:var(--green);position:absolute;left:0;font-size:10px;top:1px;}
+
+  .next-steps{margin-top:10px;padding:16px 22px;background:linear-gradient(135deg,var(--blue) 0%,#004d82 100%);border-radius:10px;color:#fff;}
+  .next-steps h3{color:#fff;font-size:15px;font-weight:800;margin-bottom:7px;}
+  .next-steps ol{list-style:none;counter-reset:step;}
+  .next-steps ol li{counter-increment:step;padding:5px 0 5px 34px;position:relative;font-size:11.5px;color:rgba(255,255,255,0.92);line-height:1.4;}
+  .next-steps ol li::before{content:counter(step);position:absolute;left:0;top:4px;background:var(--orange);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;}
+  .cta-banner{margin-top:12px;padding:16px 22px;background:var(--dark);color:#fff;border-radius:10px;display:flex;justify-content:space-between;align-items:center;}
+  .cta-banner .txt h4{font-size:14px;color:#fff;font-weight:700;margin-bottom:4px;}
+  .cta-banner .txt p{color:rgba(255,255,255,0.7);font-size:11px;margin-bottom:0;}
+  .cta-banner .contact{text-align:right;font-size:11px;color:rgba(255,255,255,0.8);line-height:1.5;}
+  .cta-banner .contact .name{color:var(--orange);font-weight:700;font-size:12px;}
+  .lead-note{font-size:10px;color:var(--grey);font-style:italic;margin-top:7px;}
+  .fee-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 6px;}
+  .fee-card{border-radius:10px;padding:15px 18px;color:#fff;}
+  .fee-card.one{background:linear-gradient(135deg,var(--blue) 0%,#004d82 100%);}
+  .fee-card.mo{background:linear-gradient(135deg,var(--teal) 0%,#127f97 100%);}
+  .fee-card .k{font-size:9px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.8);font-weight:700;display:block;margin-bottom:4px;}
+  .fee-card .v{font-size:17px;font-weight:800;color:#fff;display:block;line-height:1.15;}
+  .fee-card .s{font-size:9.5px;color:rgba(255,255,255,0.85);display:block;margin-top:5px;line-height:1.4;}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="page cover">
+  <div class="cover-inner">
+    <img class="cover-logo" src="file:///c:/vscode/tech-branding/tech-branding/assets/logos/png/technijian-logo-reverse-white-2500x834.png" alt="Technijian">
+    <span class="cover-badge">Development Overview</span>
+    <h1>Building the<br>AI Lead Gen <span class="o">Engine</span></h1>
+    <div class="cover-sub">An AI automation engine that finds, scores, and engages VisionWise's accredited-investor market &mdash; prototyped in Claude Code, productionized on a managed AI automation server, and driven by a VWC control web app powered by Technijian Chat.AI.</div>
+    <div class="cover-client">
+      <div class="prep">Prepared For</div>
+      <div class="client">VisionWise Capital, LLC</div>
+      <div class="sub">Sanford D. Coggins, Founder &middot; new build engagement &mdash; fixed fee + monthly hosting</div>
+    </div>
+  </div>
+  <div class="cover-foot">Prepared May 21, 2026 &nbsp;&middot;&nbsp; <span class="conf">CONFIDENTIAL</span> &nbsp;&middot;&nbsp; Technijian | technology as a solution</div>
+</div>
+
+<!-- PAGE 2: THE ENGINE -->
+<div class="page">
+  <div class="page-head"><img src="file:///c:/vscode/tech-branding/tech-branding/assets/logos/png/technijian-logo-full-color-1200x251.png" alt="Technijian"><span class="page-tag">The Engine</span></div>
+  <div class="blue-underline"></div>
+  <div class="section-pad">
+    <div class="section-kicker">What We're Building</div>
+    <div class="section-title">From raw market to warm conversation</div>
+    <div class="section-subtitle">A repeatable, AI-assisted engine that turns a finite, enumerable universe of investors and partners into qualified, scored, human-approved conversations &mdash; routed into VWC's CRM for Sanford and the team to close, and controlled by VWC through a web application.</div>
+    <div class="pipeline">
+      <div class="step"><span class="n">1 &middot; Identify</span><span class="d">Build the named list from authoritative sources</span></div>
+      <div class="arr">&rarr;</div>
+      <div class="step"><span class="n">2 &middot; Enrich</span><span class="d">Append firmographic + wealth-screen data, verify</span></div>
+      <div class="arr">&rarr;</div>
+      <div class="step"><span class="n">3 &middot; Score (AI)</span><span class="d">Rank fit + likelihood, with audit rationale</span></div>
+      <div class="arr">&rarr;</div>
+      <div class="step"><span class="n">4 &middot; Personalize (AI)</span><span class="d">Persona-aware email + LinkedIn drafts</span></div>
+      <div class="arr">&rarr;</div>
+      <div class="step"><span class="n">5 &middot; Approve</span><span class="d">VWC approves every send in the web app</span></div>
+      <div class="arr">&rarr;</div>
+      <div class="step"><span class="n">6 &middot; Route + Report</span><span class="d">Into VWC's CRM with provenance; dashboard</span></div>
+    </div>
+    <div class="pull-quote">We <span class="q">prototype this pipeline in Claude Code first</span> and review the real results with VWC &mdash; proving we pull the <em>right</em> investors and the <em>right</em> data &mdash; <span class="q">before</span> we build the production automation server and the control web app. Build the cheap thing, validate, then automate.</div>
+    <div class="mini-grid three">
+      <div class="mini-card"><h4>Family Offices</h4><span class="who">Category 1</span><p>Finite universe (FINTRX, OpenCorporates). Hyper-personalized, intro-led outreach.</p></div>
+      <div class="mini-card"><h4>RIAs</h4><span class="who">Category 2</span><p>Fully enumerable via SEC IAPD + Apollo. RIA-to-RIA sequences and IC briefings.</p></div>
+      <div class="mini-card"><h4>Accredited Investors</h4><span class="who">Category 3 &mdash; broad umbrella</span><p>HNW owners, high-income professionals, and more &mdash; so no slice of the market is missed.</p></div>
+    </div>
+    <p class="lead-note">Every contacted investor must be a <strong>verified accredited investor</strong> (Reg D 506(c)). VWC reviews and approves all outreach.</p>
+  </div>
+  <div class="page-foot">VWC AI Lead Gen &mdash; Development Overview &nbsp;&middot;&nbsp; <span class="confidential">CONFIDENTIAL</span> &nbsp;&middot;&nbsp; Technijian &nbsp;&middot;&nbsp; 2</div>
+</div>
+
+<!-- PAGE 3: ARCHITECTURE -->
+<div class="page">
+  <div class="page-head"><img src="file:///c:/vscode/tech-branding/tech-branding/assets/logos/png/technijian-logo-full-color-1200x251.png" alt="Technijian"><span class="page-tag">Architecture</span></div>
+  <div class="blue-underline"></div>
+  <div class="section-pad">
+    <div class="section-kicker">Architecture &amp; Build Path</div>
+    <div class="section-title">Prototype, productionize, then put VWC in control</div>
+    <div class="section-subtitle">We de-risk in Claude Code, validate the data with VWC, build the standing AI automation server, then ship a web application that lets VWC run and adjust the engine themselves &mdash; with AI connectivity and token usage delivered through Technijian Chat.AI.</div>
+    <div class="pipeline">
+      <div class="step"><span class="n">Prototype</span><span class="d">Built in Claude Code (Ravi-assisted)</span></div>
+      <div class="arr">&rarr;</div>
+      <div class="step"><span class="n">Validate</span><span class="d">Review real results with VWC &mdash; right data?</span></div>
+      <div class="arr">&rarr;</div>
+      <div class="step"><span class="n">Automation Server</span><span class="d">Agent + Harness + Skills + N8N</span></div>
+      <div class="arr">&rarr;</div>
+      <div class="step"><span class="n">Web App</span><span class="d">VWC control + Technijian Chat.AI</span></div>
+      <div class="arr">&rarr;</div>
+      <div class="step"><span class="n">Live</span><span class="d">Runs on schedule &rarr; VWC's CRM</span></div>
+    </div>
+    <div class="server-band">
+      <span class="lbl">The production AI automation server</span>
+      <div class="server-grid">
+        <div class="c"><span class="t">Agent</span><span class="d">Reasoning core that runs the lead-gen logic end to end</span></div>
+        <div class="c"><span class="t">Agent Harness</span><span class="d">Runtime hosting the agent, tools, state &amp; scheduling</span></div>
+        <div class="c"><span class="t">Skills</span><span class="d">Reusable capabilities: identify, enrich, score, draft</span></div>
+        <div class="c"><span class="t">N8N</span><span class="d">Workflow automation orchestrating pipeline + approvals</span></div>
+      </div>
+      <div class="extra">&bull; <b>AI connectivity &amp; token usage</b> is delivered through <b>Technijian Chat.AI</b> &mdash; the AI gateway that provides model access and meters token consumption. &nbsp; &bull; <b>VWC control web app</b> (Phase 4) sits on top so VWC manages targets, approvals, scoring, and AI usage without engineering.</div>
+    </div>
+    <p style="font-size:11px;margin-bottom:5px;"><strong>Fed by</strong> VWC's data + enrichment sources (VWC owns the subscriptions); AI via Technijian Chat.AI:</p>
+    <div class="stack-grid">
+      <div class="stack-card"><span class="tool">SEC IAPD</span><span class="use">Form ADV &mdash; every RIA (free)</span></div>
+      <div class="stack-card"><span class="tool">FINTRX</span><span class="use">Family-office contacts + mandates</span></div>
+      <div class="stack-card"><span class="tool">Apollo + Hunter</span><span class="use">B2B contacts + email verification</span></div>
+      <div class="stack-card"><span class="tool">ATTOM + BatchData</span><span class="use">Owner data + contact append</span></div>
+      <div class="stack-card"><span class="tool">Technijian Chat.AI</span><span class="use">AI connectivity + token metering</span></div>
+      <div class="stack-card"><span class="tool">CRM &mdash; your choice</span><span class="use">HubSpot, or Technijian-hosted branded SuiteCRM</span></div>
+    </div>
+    <div class="pull-quote" style="margin-top:10px;font-size:11.5px;"><strong>CRM, your way:</strong> integrate VWC's existing <span class="q">HubSpot</span>, or let Technijian host a <strong>customized, VWC-branded SuiteCRM</strong> at crm.visionwisecapital.com and <strong>retire the HubSpot subscription</strong> &mdash; open-source, no per-seat fees, tuned to VWC's exact workflow.</div>
+  </div>
+  <div class="page-foot">VWC AI Lead Gen &mdash; Development Overview &nbsp;&middot;&nbsp; <span class="confidential">CONFIDENTIAL</span> &nbsp;&middot;&nbsp; Technijian &nbsp;&middot;&nbsp; 3</div>
+</div>
+
+<!-- PAGE 4: PHASES 1 & 2 -->
+<div class="page">
+  <div class="page-head"><img src="file:///c:/vscode/tech-branding/tech-branding/assets/logos/png/technijian-logo-full-color-1200x251.png" alt="Technijian"><span class="page-tag">Phases 1 &amp; 2</span></div>
+  <div class="blue-underline"></div>
+  <div class="section-pad">
+    <div class="section-kicker">What's Covered &mdash; Define &amp; Prove</div>
+    <div class="section-title">Discovery, then prototype &amp; validate</div>
+    <div class="phase-timeline">
+      <div class="phase-row"><div class="phase-num"><span class="m">Phase</span><span class="n">1</span></div><div class="phase-content"><h3>Discovery &amp; Strategy</h3><p class="obj">Lock the targets, data sources, success metrics, and the data-quality bar before any build.</p><ul><li>Strategy brief + confirmed persona definitions across the three categories + channel partners</li><li>Recommended data sources, tooling, and channel mix</li><li>Success metrics + the explicit data-quality criteria Phase 2 must hit</li></ul></div></div>
+      <div class="phase-row"><div class="phase-num"><span class="m">Phase</span><span class="n">2</span></div><div class="phase-content"><h3>Prototype in Claude Code &mdash; validate the data</h3><p class="obj">Build a working prototype of the pipeline directly in Claude Code &mdash; pull, enrich, score, and draft against <em>real</em> records &mdash; with Ravi engaging directly when judgment or review is needed. Then <strong>review the results with VWC</strong> to confirm we are getting the <strong>right investors and the right data</strong> before investing in production.</p><ul><li>Working Claude Code prototype of the identify &rarr; enrich &rarr; score &rarr; draft flow</li><li>Sample enriched + scored lead sets, by category, for VWC review</li><li>Data-quality findings + tuning of sources, filters, and scoring</li><li><strong>Go / no-go checkpoint</strong> with VWC before Phases 3&ndash;4</li></ul></div></div>
+    </div>
+    <p class="lead-note">Phase 2 is the de-risking step: it proves the data and scoring are right on real records <em>before</em> a dollar goes into the production server and web app. VWC sees actual prospects, not slideware.</p>
+  </div>
+  <div class="page-foot">VWC AI Lead Gen &mdash; Development Overview &nbsp;&middot;&nbsp; <span class="confidential">CONFIDENTIAL</span> &nbsp;&middot;&nbsp; Technijian &nbsp;&middot;&nbsp; 4</div>
+</div>
+
+<!-- PAGE 5: PHASE 3 -->
+<div class="page">
+  <div class="page-head"><img src="file:///c:/vscode/tech-branding/tech-branding/assets/logos/png/technijian-logo-full-color-1200x251.png" alt="Technijian"><span class="page-tag">Phase 3 &mdash; Production</span></div>
+  <div class="blue-underline"></div>
+  <div class="section-pad">
+    <div class="section-kicker">What's Covered &mdash; The Production Engine</div>
+    <div class="section-title">Phase 3 &mdash; the AI automation server</div>
+    <div class="section-subtitle">Once VWC signs off on the prototype data, we productionize it as a standing, hosted AI automation server &mdash; running continuously with human-in-the-loop approval, with AI delivered through Technijian Chat.AI.</div>
+    <div class="mini-grid">
+      <div class="mini-card"><h4>1 &middot; Agent + Agent Harness</h4><span class="who">Reasoning core + runtime</span><p>The validated logic deployed as an Agent on the Agent Harness &mdash; hosted, scheduled, stateful, observable &mdash; so it runs without a human babysitting it.</p></div>
+      <div class="mini-card"><h4>2 &middot; Skills</h4><span class="who">Reusable capabilities</span><p>Identify, enrich, score, and draft packaged as discrete Skills &mdash; versioned and testable, each improvable independently.</p></div>
+      <div class="mini-card"><h4>3 &middot; N8N workflow automation</h4><span class="who">Orchestration + approvals</span><p>Runs the end-to-end pipeline on a schedule and routes records through the human-in-the-loop approval gate before anything sends.</p></div>
+      <div class="mini-card"><h4>4 &middot; Technijian Chat.AI</h4><span class="who">AI connectivity + tokens</span><p>All model calls route through Technijian Chat.AI for AI connectivity and metered token usage &mdash; one governed, observable AI layer.</p></div>
+      <div class="mini-card"><h4>5 &middot; CRM + deliverability</h4><span class="who">HubSpot or SuiteCRM</span><p>Connect VWC's existing <strong>HubSpot</strong>, or have Technijian host, customize &amp; brand <strong>SuiteCRM</strong> (crm.visionwisecapital.com); scored leads land with source/score/rationale and disposition flows back. Dedicated domain (SPF/DKIM/DMARC), warm-up, suppression, CAN-SPAM opt-out.</p></div>
+      <div class="mini-card" style="border-left-color:var(--green);"><h4>6 &middot; Monitoring</h4><span class="who">Health + KPIs</span><p>Server health monitoring/alerting plus the KPI data that powers the web-app dashboard (Phase 4).</p></div>
+    </div>
+    <p class="lead-note">Hosted and operated by Technijian on an ongoing basis (see Commercials), documented for full transparency, and built to hand off.</p>
+  </div>
+  <div class="page-foot">VWC AI Lead Gen &mdash; Development Overview &nbsp;&middot;&nbsp; <span class="confidential">CONFIDENTIAL</span> &nbsp;&middot;&nbsp; Technijian &nbsp;&middot;&nbsp; 5</div>
+</div>
+
+<!-- PAGE 6: PHASE 4 WEB APP -->
+<div class="page">
+  <div class="page-head"><img src="file:///c:/vscode/tech-branding/tech-branding/assets/logos/png/technijian-logo-full-color-1200x251.png" alt="Technijian"><span class="page-tag">Phase 4 &mdash; Control</span></div>
+  <div class="blue-underline"></div>
+  <div class="section-pad">
+    <div class="section-kicker">What's Covered &mdash; VWC in Control</div>
+    <div class="section-title">Phase 4 &mdash; the VWC control web application</div>
+    <div class="section-subtitle">A web application that puts VWC in the driver's seat &mdash; review and approve outreach, manage targets and sources, tune scoring and sequences, watch the dashboard, and manage AI usage. It interfaces <strong>Technijian Chat.AI</strong> for AI connectivity and token usage. Built so VWC can make changes without waiting on engineering.</div>
+    <div class="mini-grid three">
+      <div class="mini-card"><h4>Review &amp; Approve</h4><span class="who">Human-in-the-loop</span><p>The approval queue in the browser &mdash; edit, approve, or reject every drafted message before it sends.</p></div>
+      <div class="mini-card"><h4>Targets &amp; Sources</h4><span class="who">Self-service</span><p>Turn audiences/segments on or off, adjust filters, and import lists &mdash; no code, no ticket.</p></div>
+      <div class="mini-card"><h4>Scoring &amp; Sequences</h4><span class="who">Tunable</span><p>Adjust scoring thresholds and outreach copy/cadence directly, with changes versioned.</p></div>
+      <div class="mini-card"><h4>Dashboard &amp; Reporting</h4><span class="who">Visibility</span><p>Live KPIs &mdash; pipeline velocity, reply rate, meetings booked, conversion &mdash; with drill-down.</p></div>
+      <div class="mini-card"><h4>Technijian Chat.AI</h4><span class="who">AI + token usage</span><p>AI connectivity through Technijian Chat.AI: model selection, live token-usage visibility, and usage caps.</p></div>
+      <div class="mini-card"><h4>Roles &amp; Audit</h4><span class="who">Governance</span><p>VWC team logins, role-based permissions, and a full audit log of approvals and changes.</p></div>
+    </div>
+    <p class="lead-note">The web app is the control surface over the Phase 3 automation server &mdash; the engine runs underneath; VWC steers it from the browser.</p>
+  </div>
+  <div class="page-foot">VWC AI Lead Gen &mdash; Development Overview &nbsp;&middot;&nbsp; <span class="confidential">CONFIDENTIAL</span> &nbsp;&middot;&nbsp; Technijian &nbsp;&middot;&nbsp; 6</div>
+</div>
+
+<!-- PAGE 7: PHASES 5 & 6 -->
+<div class="page">
+  <div class="page-head"><img src="file:///c:/vscode/tech-branding/tech-branding/assets/logos/png/technijian-logo-full-color-1200x251.png" alt="Technijian"><span class="page-tag">Phases 5 &amp; 6</span></div>
+  <div class="blue-underline"></div>
+  <div class="section-pad">
+    <div class="section-kicker">What's Covered &mdash; Prove &amp; Transfer</div>
+    <div class="section-title">Pilot, go-live &amp; ongoing operation</div>
+    <div class="phase-timeline">
+      <div class="phase-row"><div class="phase-num"><span class="m">Phase</span><span class="n">5</span></div><div class="phase-content"><h3>Pilot, Tuning &amp; Go-Live</h3><p class="obj">Run a controlled pilot against a small VWC-approved list (driven from the web app), tune on real results, then authorize broader rollout.</p><ul><li>Pilot results &mdash; deliverability, reply rate, meetings booked, false-positive rate</li><li>Tuned scoring thresholds + rewritten underperforming templates</li><li>Go-live checklist + rollout plan + approval workflow + budget guardrails</li></ul></div></div>
+      <div class="phase-row"><div class="phase-num"><span class="m">Phase</span><span class="n">6</span></div><div class="phase-content"><h3>Knowledge Transfer &amp; Ongoing Operation</h3><p class="obj">Document the system, train VWC's operators on the web app, and transition into managed hosting &amp; operations.</p><ul><li>Operator runbook (review queue, approvals, scoring, suppressions, troubleshooting)</li><li>Architecture reference (components, Chat.AI, vendor contracts, key vaulting, recovery)</li><li>Recorded training session(s) + transition to ongoing hosting &amp; support</li></ul></div></div>
+    </div>
+    <p class="lead-note">After go-live, the server + web app are kept running, monitored, and improved under the monthly hosting &amp; operations engagement (next page). VWC can take operations fully in-house at any time &mdash; everything is documented and built to hand off.</p>
+  </div>
+  <div class="page-foot">VWC AI Lead Gen &mdash; Development Overview &nbsp;&middot;&nbsp; <span class="confidential">CONFIDENTIAL</span> &nbsp;&middot;&nbsp; Technijian &nbsp;&middot;&nbsp; 7</div>
+</div>
+
+<!-- PAGE 8: TIMELINE & COMMERCIALS -->
+<div class="page">
+  <div class="page-head"><img src="file:///c:/vscode/tech-branding/tech-branding/assets/logos/png/technijian-logo-full-color-1200x251.png" alt="Technijian"><span class="page-tag">Timeline &amp; Commercials</span></div>
+  <div class="blue-underline"></div>
+  <div class="section-pad">
+    <div class="section-kicker">Timeline &amp; Commercials</div>
+    <div class="section-title">Fixed fee to build, monthly to host</div>
+    <div class="section-subtitle">A new, fixed-fee build engagement &mdash; billed by milestone, not by the hour &mdash; followed by a monthly hosting &amp; operations fee that keeps the server and web app running and improving.</div>
+    <div class="fee-grid">
+      <div class="fee-card one"><span class="k">One-time &mdash; build</span><span class="v">Fixed project fee</span><span class="s">Phases 1&ndash;6, billed by milestone (below). Fixed &mdash; Technijian absorbs effort variance within the agreed scope. Amount set in the SOW.</span></div>
+      <div class="fee-card mo"><span class="k">Ongoing &mdash; monthly</span><span class="v">Hosting &amp; operations</span><span class="s">Runs, monitors, maintains &amp; improves the server, web app, and (if chosen) the hosted SuiteCRM. Monthly fee set in the SOW. AI/token usage via Technijian Chat.AI and data subscriptions are usage-based, billed to VWC.</span></div>
+    </div>
+    <table class="tbl">
+      <thead><tr><th>Phase</th><th>Covers</th><th>Timeline</th><th>Milestone billing</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1 &middot; Discovery &amp; Strategy</strong></td><td>Targets, sources, success + data-quality criteria</td><td>Wks 1&ndash;2</td><td>On signing</td></tr>
+        <tr><td><strong>2 &middot; Prototype in Claude Code</strong></td><td>Build + validate data with VWC (go/no-go)</td><td>Wks 2&ndash;4</td><td>On prototype sign-off</td></tr>
+        <tr><td><strong>3 &middot; AI Automation Server</strong></td><td>Agent, Harness, Skills, N8N, Chat.AI, CRM (HubSpot or SuiteCRM)</td><td>Wks 4&ndash;8</td><td>On server delivery</td></tr>
+        <tr><td><strong>4 &middot; Web Application</strong></td><td>VWC control panel + Technijian Chat.AI interface</td><td>Wks 7&ndash;11</td><td>On web-app delivery</td></tr>
+        <tr><td><strong>5 &middot; Pilot, Tuning &amp; Go-Live</strong></td><td>Controlled pilot &rarr; tune &rarr; rollout</td><td>Wks 11&ndash;13</td><td>On go-live</td></tr>
+        <tr><td><strong>6 &middot; Knowledge Transfer &amp; Ops</strong></td><td>Runbook, training, transition to hosting</td><td>Wks 13&ndash;14</td><td>On acceptance &rarr; monthly begins</td></tr>
+      </tbody>
+    </table>
+    <div class="mini-grid">
+      <div class="mini-card"><h4>Usage-based (billed to VWC)</h4><p>AI connectivity &amp; token usage via <strong>Technijian Chat.AI</strong>; data/enrichment subscriptions (Apollo, Hunter, ATTOM, BatchData, FINTRX) and sending infrastructure. <strong>CRM:</strong> keep HubSpot (its subscription), or switch to Technijian-hosted <strong>SuiteCRM</strong> &mdash; open-source, <strong>no per-seat fees</strong>, hosting folds into the monthly.</p></div>
+      <div class="mini-card"><h4>What VWC provides</h4><p>One empowered decision-maker (Sanford), CRM/vendor access, sample data, the Phase 2 data review + go/no-go, and approval of outreach via the web app.</p></div>
+    </div>
+    <p class="lead-note"><strong>New engagement &mdash; supersedes the prior advisory SOW.</strong> Dollar amounts (fixed build fee, monthly hosting) are set in the accompanying fixed-fee SOW.</p>
+  </div>
+  <div class="page-foot">VWC AI Lead Gen &mdash; Development Overview &nbsp;&middot;&nbsp; <span class="confidential">CONFIDENTIAL</span> &nbsp;&middot;&nbsp; Technijian &nbsp;&middot;&nbsp; 8</div>
+</div>
+
+<!-- PAGE 9: COMPLIANCE & NEXT STEPS -->
+<div class="page">
+  <div class="page-head"><img src="file:///c:/vscode/tech-branding/tech-branding/assets/logos/png/technijian-logo-full-color-1200x251.png" alt="Technijian"><span class="page-tag">Guardrails &amp; Next Steps</span></div>
+  <div class="blue-underline"></div>
+  <div class="section-pad">
+    <div class="section-kicker">Guardrails</div>
+    <div class="section-title">Built compliant by design</div>
+    <div class="compliance-box">
+      <h4>How the engine respects VWC's regulatory reality</h4>
+      <ul>
+        <li>VWC is a <strong>private real estate sponsor</strong> &mdash; not a registered investment adviser or broker-dealer. The system never performs licensed activity.</li>
+        <li>Offerings are <strong>Reg D Rule 506(c)</strong>: general solicitation is permitted, so outreach is allowed &mdash; but every investor's <strong>accredited status must be verified</strong> before any offering action.</li>
+        <li><strong>Accredited investors only</strong> &mdash; targeting and gating are designed around that constraint end-to-end.</li>
+        <li><strong>Human-in-the-loop</strong> &mdash; VWC reviews and approves every message in the web app before it sends; nothing goes out at scale unattended.</li>
+        <li>Anti-fraud discipline (no misleading or unsubstantiated performance claims), CAN-SPAM opt-out, TCPA, and state blue-sky notices respected.</li>
+        <li>Investor NPI is governed by <strong>NDA-VWC-001</strong>. VWC owns legal/compliance and engages securities counsel; Technijian flags considerations but does not give legal advice.</li>
+      </ul>
+    </div>
+    <div class="next-steps">
+      <h3>To start the build</h3>
+      <ol>
+        <li><strong>Approve this scope &amp; sign the fixed-fee build SOW</strong> (build fee + monthly hosting; supersedes the prior advisory SOW).</li>
+        <li><strong>Confirm the empowered point of contact</strong> for scope, spend, and outreach approval.</li>
+        <li><strong>Line up usage budget</strong> (Technijian Chat.AI tokens, data, CRM) &mdash; finalized with you in Phase 1.</li>
+        <li><strong>Name securities counsel</strong> for outreach-content review and the 506(c) verification approach.</li>
+      </ol>
+    </div>
+    <div class="cta-banner">
+      <div class="txt"><h4>Ready to build when you are.</h4><p>New fixed-fee build engagement &middot; monthly hosting &amp; operations.</p></div>
+      <div class="contact"><span class="name">Technijian</span><br>technology as a solution<br>RJain@technijian.com &middot; technijian.com</div>
+    </div>
+  </div>
+  <div class="page-foot">VWC AI Lead Gen &mdash; Development Overview &nbsp;&middot;&nbsp; <span class="confidential">CONFIDENTIAL</span> &nbsp;&middot;&nbsp; Technijian &nbsp;&middot;&nbsp; 9</div>
+</div>
+
+</body>
+</html>
